@@ -137,7 +137,14 @@ class ObfuscateIds
             $request->query->replace($this->decodeData($query));
         }
 
-        if ($post = $request->request->all()) {
+        if ($request->isJson()) {
+            if ($json = $request->json()->all()) {
+                $request->json()->replace($this->decodeData($json));
+            }
+            if ($post = $request->request->all()) {
+                $request->request->replace($this->decodeData($post));
+            }
+        } elseif ($post = $request->request->all()) {
             $request->request->replace($this->decodeData($post));
         }
     }

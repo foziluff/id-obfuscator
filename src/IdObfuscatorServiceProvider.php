@@ -2,9 +2,9 @@
 
 namespace Foziluff\IdObfuscator;
 
+use Foziluff\IdObfuscator\Middleware\ObfuscateIds;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\ServiceProvider;
-use Foziluff\IdObfuscator\Middleware\ObfuscateIds;
 
 class IdObfuscatorServiceProvider extends ServiceProvider
 {
@@ -16,6 +16,6 @@ class IdObfuscatorServiceProvider extends ServiceProvider
     public function boot(Kernel $kernel)
     {
         $kernel->pushMiddleware(ObfuscateIds::class);
-        $this->app->make(ObfuscateIds::class);
+        app(ObfuscateIds::class);
     }
 }
